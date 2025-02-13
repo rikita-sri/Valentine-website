@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Sweet Valentine 💞</title>
+    <style>
+      /* Scrolling Image Container */
+      .scroll-container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+      }
+
+      /* Scroll effect for images */
+      .scroll-content {
+        display: flex;
+        gap: 20px;
+        animation: scroll 10s linear infinite;
+      }
+
+      /* Image Styling */
+      .scroll-container img {
+        width: 300px;
+        height: 300px;
+        border-radius: 5px;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Animation for scrolling images */
+      @keyframes scroll {
+        0% { transform: translateX(20%); }
+        100% { transform: translateX(-20%); }
+      }
+
+      /* Page Styling */
+      body {
+        background-color: lightpink;
+        text-align: center;
+        font-family: cursive;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Button Styling */
+      .b {
+        padding: 10px 20px;
+        font-size: 18px;
+        border: none;
+        cursor: pointer;
+        margin: 10px;
+        border-radius: 10px;
+        background-color: aliceblue;
+        transition: 0.3s;
+      }
+
+      /* Floating hearts animation */
+      .heart {
+        position: absolute;
+        color: red;
+        font-size: 24px;
+        animation: float 5s linear infinite;
+      }
+
+      /* Animation for floating hearts */
+      @keyframes float {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-100vh); opacity: 0; }
+      }
+
+      /* Positioning the buttons beside each other */
+      #buttonContainer {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+        position: relative;
+      }
+
+      #noButton {
+        position: relative;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      /* Round Music Button at Bottom-Left */
+      #musicBtn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        padding: 15px;
+        border-radius: 50%;
+        background-color: hotpink;
+        color: white;
+        font-size: 20px;
+        cursor: pointer;
+        border: none;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        transition: 0.3s;
+      }
+
+      #musicBtn:hover {
+        background-color: deeppink;
+      }
+    </style>
+</head>
+<body>
+
+    <!-- Round Music Button at Bottom-Left -->
+    <button id="musicBtn" onclick="toggleMusic()">🎵</button>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" autoplay loop muted>
+      <source src="haan.mp3" type="audio/mpeg">
+      Your browser does not support the audio tag.
+    </audio>
+
+    <!-- Image Scrolling Section -->
+    <div class="scroll-container">
+      <div class="scroll-content">
+        <img src="https://i.pinimg.com/736x/e8/2f/82/e82f82798a03e9a7ef0408542ccbe614.jpg">
+        <img src="https://i.pinimg.com/736x/18/17/81/181781d4989ff9b8c63790444a5fb46a.jpg">
+        <img src="https://i.pinimg.com/736x/fc/bf/a6/fcbfa610695a3a3b0d5a29e63b0938a1.jpg">
+        <img src="https://i.pinimg.com/736x/bb/d8/c3/bbd8c3e49ea1170c925f447823702186.jpg">
+        <img src="https://i.pinimg.com/736x/6f/45/10/6f45100aba3d4cc544b0c49b1a5387c1.jpg">
+      </div>
+    </div>
+
+    <!-- Valentine Question -->
+    <h1><i>Will you be my Valentine? 🥰</i></h1>
+    <div id="buttonContainer">
+      <button class="b" id="yesButton">Yes</button>
+      <button class="b" id="noButton">No</button>
+    </div>
+
+    <script>
+      // Function to create floating hearts on the screen
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.top = "100vh";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+      setInterval(createHeart, 300);
+
+      // Move 'No' Button far away when hovered over
+      document.getElementById("noButton").addEventListener("mouseover", function() {
+        let newX = (Math.random() * 60 - 30) + "vw";
+        let newY = (Math.random() * 60 - 30) + "vh";
+        this.style.transform = `translate(${newX}, ${newY})`;
+      });
+
+      // Redirect to date selection page when 'Yes' is clicked
+      document.getElementById("yesButton").addEventListener("click", function() {
+        window.location.assign('Gfg2.html');
+      });
+
+      // Toggle Music Play/Pause
+      function toggleMusic() {
+        var music = document.getElementById("bgMusic");
+        var musicBtn = document.getElementById("musicBtn");
+
+        if (music.paused) {
+          music.play();
+          musicBtn.innerHTML = "⏸️";
+        } else {
+          music.pause();
+          musicBtn.innerHTML = "🎵";
+        }
+      }
+
+      // Unmute Music on First Click Anywhere
+      window.addEventListener("click", () => {
+        document.getElementById("bgMusic").muted = false;
+      }, { once: true });
+    </script>
+</body>
+</html>

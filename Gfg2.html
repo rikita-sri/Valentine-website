@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Our Special Date 💖</title>
+  <style>
+    /* Ensure scrolling works */
+    html, body {
+      height: auto;
+      overflow-y: auto; /* Enables vertical scrolling */
+      background-color: lightpink;
+      text-align: center;
+      font-family: cursive;
+      position: relative;
+    }
+
+    h1 {
+      opacity: 0;
+      animation: fadeIn 3s forwards;
+      text-shadow: 2px 2px 10px white;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    .b {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      margin: 10px;
+      border-radius: 10px;
+      background-color: aliceblue;
+      transition: 0.3s;
+    }
+
+    .b:hover {
+      background-color: lightblue;
+      transform: scale(1.1);
+    }
+
+    .b:active {
+      transform: scale(0.9);
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    .heart {
+      position: absolute;
+      bottom: 0;
+      font-size: 2rem;
+      animation: float 5s linear infinite;
+    }
+
+    /* Play/Pause Button Style */
+    #musicBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      font-size: 16px;
+      border: none;
+      border-radius: 50%;
+      background-color: hotpink;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #musicBtn:hover {
+      background-color: deeppink;
+    }
+
+    /* Video Styling */
+    #specialVideo {
+      width: 80%;
+      max-width: 600px;
+      border-radius: 15px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Add extra space at bottom to ensure scrolling */
+    .spacer {
+      height: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>
+    Thank you for saying yes! Love is about cherishing each moment, from the smallest laughter to the biggest dreams. 💕  
+    No matter where life takes us, every moment spent together is special.  
+    Here's to endless memories and unforgettable adventures!  
+  </h1>
+  
+  <h2>Now, it's time to pick a perfect date! 😇</h2>
+
+  <div id="buttonContainer">
+    <button class="b" onclick="alert('BBQ🍖 - A day filled with great food and amazing company! Get ready for some tasty bites and fun conversations. 😍')">BBQ 🍖</button>
+    <button class="b" onclick="alert('A cozy Night In!🎬 - A relaxing night filled with movies, delicious food, and warm cuddles. The perfect way to unwind together! 💖')">Night In 🎬</button>
+  </div>
+
+  <!-- Spacer to push video lower -->
+  <div class="spacer"></div>
+
+  <!-- Video (Generic Couple Video) -->
+  <h2>Here’s a Special Memory for You 🎥🫂</h2>
+  <video id="specialVideo" controls>
+      <source src=https://videos.pexels.com/video-files/2035509/2035509-hd_1920_1080_24fps.mp4 type="video/mp4">
+      Your browser does not support the video tag.
+  </video>
+  
+  <br><br>
+
+  <!-- Play/Pause Video Button -->
+  <button class="b" onclick="toggleVideo()">🎬 Play/Pause Video</button>
+
+  <!-- Background Music (Autoplay, but muted initially) -->
+  <audio id="bgMusic" autoplay loop muted>
+    <source src="Perfect.mp3" type="audio/mpeg">
+    Your browser does not support the audio tag.
+  </audio>
+
+  <!-- Play/Pause Music Button -->
+  <button id="musicBtn" onclick="toggleMusic()">🎵</button>
+
+  <script>
+    // Floating Hearts Animation
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 500);
+
+    // Toggle Music Play/Pause
+    function toggleMusic() {
+      var music = document.getElementById("bgMusic");
+      var musicBtn = document.getElementById("musicBtn");
+
+      if (music.paused) {
+        music.play();
+        musicBtn.innerHTML = "⏸️"; // Change icon to pause
+      } else {
+        music.pause();
+        musicBtn.innerHTML = "🎵"; // Change icon back to play
+      }
+    }
+
+    // Unmute Music on First Click Anywhere
+    window.addEventListener("click", () => {
+      document.getElementById("bgMusic").muted = false;
+    }, { once: true }); // Ensures it runs only once
+
+    // Toggle Video Play/Pause
+    function toggleVideo() {
+      var video = document.getElementById("specialVideo");
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    }
+  </script>
+</body>
+</html>
